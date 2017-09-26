@@ -12,6 +12,7 @@ CONDITION_OCCURRENCE,PROVIDER_ID,YES,INTEGER,"A foreign key to the Provider in t
 CONDITION_OCCURRENCE,CONDITION_SOURCE_VALUE,YES,CHARACTER VARYING,"The source code for the condition as it appears in the source data. This code is mapped to a standard condition concept in the Standardized Vocabularies and the original code is stored here for reference."
 CONDITION_OCCURRENCE,CONDITION_SOURCE_CONCEPT_ID,YES,INTEGER,"A foreign key to a Condition Concept that refers to the code used in the source."
 CONDITION_OCCURRENCE,CONDITION_STATUS_SOURCE_VALUE,YES,CHARACTER VARYING,"The source code for the condition status as it appears in the source data."
+CONDITION_OCCURRENCE,CONDITION_STATUS_CONCEPT_ID,YES,INTEGER,"A foreign key to the predefined concept in the standard vocabulary reflecting the condition status"
 DEATH,PERSON_ID,NO,INTEGER,"A foreign key identifier to the deceased person. The demographic details of that person are stored in the person table."
 DEATH,DEATH_DATE,NO,DATE,"The date the person was deceased. If the precise date including day or month is not known or not allowed, December is used as the default month, and the last day of the month the default day."
 DEATH,DEATH_DATETIME,YES,DATETIME,"The date and time the person was deceased. If the precise date including day or month is not known or not allowed, December is used as the default month, and the last day of the month the default day."
