@@ -24,8 +24,8 @@ Field|Required|Type|Description
 |amount_allowed|No|float|The contracted amount agreed between the payer and provider.|
 |revenue_code_concept_id|No|integer|A foreign key referring to a Standard Concept ID in the Standardized Vocabularies for Revenue codes.|
 |revenue_code_source_value|No|string(50)|The source code for the Revenue code as it appears in the source data, stored here for reference.|
-|drg_concept_id|	integer|	No	|A foreign key to the predefined concept in the DRG Vocabulary reflecting the DRG for a visit.|
-|drg_source_value|	varchar(3)|	No|	The 3-digit DRG source code as it appears in the source data.|
+|drg_concept_id|No|integer|A foreign key to the predefined concept in the DRG Vocabulary reflecting the DRG for a visit.|
+|drg_source_value|No|varchar(3)|The 3-digit DRG source code as it appears in the source data.|
 
 ### Conventions 
 The COST table will store information reporting money or currency amounts. There are three types of cost data, defined in the cost_type_concept_id: 1) paid or reimbursed amounts, 2) charges or list prices (such as Average Wholesale Prices), and 3) costs or expenses incurred by the provider. The defined fields are variables found in almost all U.S.-based claims data sources, which is the most common data source for researchers. Non-U.S.-based data holders are encouraged to engage with OHDSI to adjust these tables to their needs.
