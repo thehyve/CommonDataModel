@@ -45,7 +45,7 @@ Standardized vocabulary
 
 CREATE TABLE concept (
   concept_id			INTEGER			NOT NULL,
-  concept_name			VARCHAR(255)	NOT NULL,
+  concept_name			VARCHAR(255)	NULL,
   domain_id				VARCHAR(20)		NOT NULL,
   vocabulary_id			VARCHAR(20)		NOT NULL,
   concept_class_id		VARCHAR(20)		NOT NULL,
@@ -115,7 +115,7 @@ CREATE TABLE relationship (
 
 CREATE TABLE concept_synonym (
   concept_id			INTEGER			NOT NULL,
-  concept_synonym_name	VARCHAR(1000)	NOT NULL,
+  concept_synonym_name	VARCHAR(1000)	NULL,
   language_concept_id	INTEGER			NOT NULL
 )
 ;
