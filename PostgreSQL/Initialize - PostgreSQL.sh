@@ -16,7 +16,7 @@ VOCABULARY_PATH="$7" # Absolute path
 CDM_DATA_PATH="$8"
 
 # Check whether command line arguments are given
-if [[ $DATABASE_NAME = "" ]] || [[ $USER = "" ]] || [[ $DATABASE_SCHEMA = "" ]]; then
+if test "$DATABASE_NAME" = ""  || "$USER" = "" || "$DATABASE_SCHEMA" = ""; then
     printf "Usage: \n"
     printf "   ./execute_etl.sh <host> <port> <database_name> <schema_name> <user_name> <password> [<vocabulary_path> [<cdm_data_path>]]\n"
     exit 1
@@ -37,10 +37,10 @@ psql -h $HOST_NAME -p $PORT -U $USER -d $DATABASE_NAME -c "ALTER DATABASE $DATAB
 psql -h $HOST_NAME -p $PORT -U $USER -d $DATABASE_NAME -f "./OMOP CDM ddl - PostgreSQL.sql" -q
 
 # Load vocabulary
-if [[ $VOCABULARY_PATH != "" ]]; then
+if test "$VOCABULARY_PATH" != ""; then
     printf "\nLoading Vocabulary...\n"
-    vocab_tables=(CONCEPT DRUG_STRENGTH CONCEPT_RELATIONSHIP CONCEPT_ANCESTOR CONCEPT_SYNONYM VOCABULARY RELATIONSHIP CONCEPT_CLASS DOMAIN)
-    for tableName in "${vocab_tables[@]}"; do :
+    vocab_tables="CONCEPT DRUG_STRENGTH CONCEPT_RELATIONSHIP CONCEPT_ANCESTOR CONCEPT_SYNONYM VOCABULARY RELATIONSHIP CONCEPT_CLASS DOMAIN"
+    for tableName in $vocab_tables; do
         printf "$tableName: "
         path="$VOCABULARY_PATH/$tableName.csv"
         psql -h $HOST_NAME -p $PORT -U $USER -d $DATABASE_NAME -c "COPY $tableName FROM '$path' WITH DELIMITER E'\t' CSV HEADER QUOTE E'\b'"
@@ -48,10 +48,10 @@ if [[ $VOCABULARY_PATH != "" ]]; then
 fi
 
 # Load sample data
-if [[ $CDM_DATA_PATH != "" ]]; then
+if test "$CDM_DATA_PATH" != ""; then
     printf "\nLoading CDM Data...\n"
-    cdm_tables=(CARE_SITE CONDITION_OCCURRENCE DEATH DRUG_EXPOSURE DEVICE_EXPOSURE LOCATION MEASUREMENT OBSERVATION PERSON PROCEDURE_OCCURRENCE PROVIDER VISIT_OCCURRENCE DRUG_ERA CONDITION_ERA)
-    for tableName in "${cdm_tables[@]}"; do :
+    cdm_tables="CARE_SITE CONDITION_OCCURRENCE DEATH DRUG_EXPOSURE DEVICE_EXPOSURE LOCATION MEASUREMENT OBSERVATION PERSON PROCEDURE_OCCURRENCE PROVIDER VISIT_OCCURRENCE DRUG_ERA CONDITION_ERA"
+    for tableName in $cdm_tables; do
         printf "$tableName: "
         path="$CDM_DATA_PATH/$tableName.csv"
         psql -h $HOST_NAME -p $PORT -U $USER -d $DATABASE_NAME -c "COPY $tableName FROM '$path' WITH DELIMITER E',' CSV HEADER QUOTE E'\b'"
