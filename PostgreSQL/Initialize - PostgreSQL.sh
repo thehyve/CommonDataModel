@@ -60,11 +60,9 @@ if test "$CDM_DATA_PATH" != ""; then
 fi
 
 printf "\nApplying constraints...\n"
-psql -h $HOST_NAME -p $PORT -U $USER -d $DATABASE_NAME -f "./OMOP CDM postgresql constraints - PostgreSQL.txt" -q
+psql -h $HOST_NAME -p $PORT -U $USER -d $DATABASE_NAME -f "./OMOP CDM postgresql constraints.txt" -q
 printf "\nApplying indices...\n"
 psql -h $HOST_NAME -p $PORT -U $USER -d $DATABASE_NAME -f "./OMOP CDM postgresql pk indexes.txt"
 
 # Restore search path
 psql -h $HOST_NAME -p $PORT -U $USER -d $DATABASE_NAME -c "ALTER DATABASE $DATABASE_NAME SET search_path TO \"\$user\", public;"
-
-
